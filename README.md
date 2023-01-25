@@ -2,8 +2,9 @@
 
 A simple cli password manager in pure python
 
-[Usage](#Usage)
-[Installation](#Installation)
+* [Usage](#Usage)
+
+* [Installation](#Installation)
 
 # Usage
 
