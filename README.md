@@ -36,7 +36,7 @@ Mac users can place the following function into their `.bashrc/.zshrc` file
 
    ```bash
    pndc (){
-     sudo pnd.py $1 | pbcopy
+     sudo pnd $1 | pbcopy
    }
    ```
 
@@ -51,7 +51,7 @@ To get the most out of `pnd` install fzf and add the following alias to your `.b
 alias pnds="sudo pnd ls | fzf | xargs sudo pnd | pbcopy"
 ```
 
-Now `pns` launches an interactive fuzzy search over all passwords and copies the selected one to your clipboard.
+Now `pnds` launches an interactive fuzzy search over all passwords and copies the selected one to your clipboard.
 
 ### (Recommended) Install [sudo-touchid](https://github.com/artginzburg/sudo-touchid)
 
