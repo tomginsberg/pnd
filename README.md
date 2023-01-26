@@ -63,3 +63,10 @@ Installation is simple with homebrew
    brew install artginzburg/tap/sudo-touchid
    sudo brew services start sudo-touchid
    ```
+
+# Uninstall
+    
+    ```shell  
+    sudo rm `which pnd`
+    sudo rm -rf ~/.pnd
+    ```
