@@ -1,4 +1,3 @@
-#!python3
 import base64
 import json
 import secrets
@@ -6,6 +5,7 @@ import string
 from getpass import getpass
 from os.path import join
 from sys import argv
+from os import environ
 
 # check if cryptography package is installed
 try:
@@ -51,7 +51,7 @@ def generate(length=12):
 
 if __name__ == '__main__':
     if len(argv) == 1:
-        print('pnd <pass name>|add|ls|rm|encrypt|decrypt|generate')
+        print('pnd.py <pass name>|add|ls|rm|encrypt|decrypt|generate')
         exit(1)
 
     if argv[1] == 'add':
