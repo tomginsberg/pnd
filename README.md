@@ -36,7 +36,7 @@ Mac users can place the following function into their `.bashrc/.zshrc` file
 
    ```bash
    pndc (){
-     sudo pnd.py $1 | pbcopy
+     sudo pnd $1 | pbcopy
    }
    ```
 
