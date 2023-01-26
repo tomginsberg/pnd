@@ -11,10 +11,10 @@ fi
 # download the file using wget
 # wget -O pnd https://raw.githubusercontent.com/tomginsberg/pnd/main/pnd.py
 # ask the user for their python executable default is python3
-read -r -p "Enter your python executable [python3]: " PYTHON_EXECUTABLE
+read -r -p "Enter your python executable [/usr/bin/python3]: " PYTHON_EXECUTABLE
 # if the user did not enter anything set the python executable to python3
 if [ -z "$PYTHON_EXECUTABLE" ]; then
-  PYTHON_EXECUTABLE="python3"
+  PYTHON_EXECUTABLE="/usr/bin/python3"
 fi
 # prepend the python executable (#!PYTHON_EXECUTABLE) to the file named pnd.py and rename it pnd
 echo "#!$PYTHON_EXECUTABLE" | cat - ~/.pnd/pnd.py | sudo tee pnd
