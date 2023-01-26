@@ -17,7 +17,7 @@ if [ -z "$PYTHON_EXECUTABLE" ]; then
   PYTHON_EXECUTABLE="python3"
 fi
 # prepend the python executable (#!PYTHON_EXECUTABLE) to the file named pnd.py and rename it pnd
-echo "#!$PYTHON_EXECUTABLE" | cat - pnd.py > pnd
+echo "#!$PYTHON_EXECUTABLE" | cat - ~/.pnd/pnd.py > pnd
 
 # print moving the file to the install location
 echo "Moving pnd executable to" $INSTALL_LOCATION
