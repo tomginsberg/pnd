@@ -25,14 +25,11 @@ echo "Moving pnd executable to" $INSTALL_LOCATION
 sudo mv pnd $INSTALL_LOCATION
 # make the file executable by the root user
 echo "Setting permissions"
-#sudo chown root $INSTALL_LOCATION/pnd
-# change group to wheel
 sudo chmod u=rwx,g=rx,o=rx $INSTALL_LOCATION/pnd
 
 echo "Creating your secure data directory ~/.pnd"
 echo "Passwords will be stored in ~/.pnd/data, readable only by the root user"
-# sudo mkdir -p ~/.pnd
-sudo touch ~/.pnd/data
+echo "{}" | sudo tee ~/.pnd/data
 sudo chmod 700 ~/.pnd/data
 echo " "
 echo "Improve the pnd user experience by adding the <pndc> function to your .bashrc/.zshrc file"
