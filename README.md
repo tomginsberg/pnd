@@ -66,7 +66,7 @@ Installation is simple with homebrew
 
 # Uninstall
     
-  ```shell  
-  sudo rm /usr/local/bin/pnd
-  sudo rm -rf ~/.pnd
-  ```
+```shell
+sudo rm /usr/local/bin/pnd
+sudo rm -rf ~/.pnd
+```
