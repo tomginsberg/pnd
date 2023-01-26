@@ -7,25 +7,6 @@ from os.path import join
 from sys import argv
 from os import environ
 
-# check if cryptography package is installed
-try:
-    import cryptography
-
-    cryptography_installed = True
-except ImportError:
-    cryptography_installed = False
-
-if cryptography_installed:
-    from cryptography.fernet import Fernet
-    from cryptography.hazmat.primitives import hashes
-    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-
-
-def check_crypt_req():
-    if not cryptography_installed:
-        raise RuntimeError('The cryptography package is required for this functionality (pip install cryptography)')
-
-
 HOME = environ['HOME']
 VAULT = join(HOME, '.pnd', 'vault')
 DATA = join(HOME, '.pnd', 'data')
@@ -108,13 +89,19 @@ if __name__ == '__main__':
         if remove.lower() == 'y':
             del x[name]
             print(f'Removed {name}.')
-            with open(PND, 'w') as f:
+            with open(DATA, 'w') as f:
                 json.dump(x, f)
         else:
             print('Aborting.')
         exit(1)
     elif argv[1] == 'encrypt':
-        check_crypt_req()
+        try:
+            from cryptography.fernet import Fernet
+            from cryptography.hazmat.primitives import hashes
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+        except ImportError:
+            raise RuntimeError('The cryptography package is required for this functionality (pip install cryptography)')
+
         print('Encrypting stored passwords...')
         password = getpass('Key: ')
         confirmation = getpass('Confirm Key: ')
@@ -142,7 +129,13 @@ if __name__ == '__main__':
             f.write(encrypted)
 
     elif argv[1] == 'decrypt':
-        check_crypt_req()
+        try:
+            from cryptography.fernet import Fernet
+            from cryptography.hazmat.primitives import hashes
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+        except ImportError:
+            raise RuntimeError('The cryptography package is required for this functionality (pip install cryptography)')
+
         password = getpass('Key: ')
         with open(VAULT, 'rb') as f:
             encrypted = f.read()
