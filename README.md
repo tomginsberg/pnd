@@ -7,8 +7,8 @@ A simple cli password manager in pure python
 Run the interactive installer
 
 ```shell
-wget https://raw.githubusercontent.com/tomginsberg/pnd/main/install.sh
-./install.sh
+git clone --depth 1 https://github.com/tomginsberg/pnd.git ~/.pnd
+~/.pnd/install
 ```
 
 # Usage
