@@ -18,7 +18,8 @@ if [ -z "$PYTHON_EXECUTABLE" ]; then
 fi
 # prepend the python executable (#!PYTHON_EXECUTABLE) to the file named pnd.py and rename it pnd
 echo "#!$PYTHON_EXECUTABLE" | cat - ~/.pnd/pnd.py > pnd
-
+# change the pnd owed by the root user
+sudo chown root pnd
 # print moving the file to the install location
 echo "Moving pnd executable to" $INSTALL_LOCATION
 # move the file to the install location
@@ -63,8 +64,8 @@ fi
 echo " "
 # print "Installation complete!" in green
 echo "Installation complete!"
-echo "To get started run 'sudo pnd add'"
+echo "To get started run simply 'sudo pnd'"
 echo " "
-# print in blue
+
 # "Note: to use all the features of pnd please install python cryptography (pip install cryptography)"
-echo "\033[0;34mNote: to use all the features of pnd please install python cryptography (pip install cryptography)"
+echo "Note: to use all the features of pnd please install python cryptography (pip install cryptography)"
