@@ -33,25 +33,25 @@ def generate(length=12):
 
 if __name__ == '__main__':
     if len(argv) == 1:
-        print('pnd <pass name>|add|ls|rm|encrypt|decrypt|generate\n')
+        print('\npnd <pass name>|add|ls|rm|encrypt|decrypt|generate')
         print(
             """
-    → `sudo pnd add` an interactive tool to add/generate new passwords
-    
-    → `sudo pnd <name of password>` prints the password with a matching name to the console.
-    
-    → `sudo pnd ls` prints of name of all saved passwords.
-    
-    → `sudo pnd rm` an interactive tool to remove passwords.
-    
-    → `sudo pnd encrypt` create an encrypted file named `~/.pnd/vault` to store your passwords safely using Fernet
-      encryption with a PBKDF2 derived key. This file is safe to back up to the cloud (e.g. google-drive or github)
-      
-    → `sudo pnd decrypt` read the `~/.pnd/vault` into a `json` format that can replace your existing `pnd` file in
-      case of data loss.
-      
-    → `pnd generate <length>` generate a secure password with a given length.
-      Note that `pnd add` also gives you the option to automatically generate passwords.
+→ `sudo pnd <name of password>` prints the password with a matching name to the console.
+
+→ `sudo pnd add` an interactive tool to add/generate new passwords
+
+→ `sudo pnd ls` prints of name of all saved passwords.
+
+→ `sudo pnd rm` an interactive tool to remove passwords.
+
+→ `sudo pnd encrypt` create an encrypted file named `~/.pnd/vault` to store your passwords safely using Fernet
+  encryption with a PBKDF2 derived key. This file is safe to back up to the cloud (e.g. google-drive or github)
+  
+→ `sudo pnd decrypt` read the `~/.pnd/vault` into a `json` format that can replace your existing `pnd` file in
+  case of data loss.
+  
+→ `pnd generate <length>` generate a secure password with a given length.
+  Note that `pnd add` also gives you the option to automatically generate passwords.
             """)
         exit(1)
 
