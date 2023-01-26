@@ -17,15 +17,16 @@ if [ -z "$PYTHON_EXECUTABLE" ]; then
   PYTHON_EXECUTABLE="python3"
 fi
 # prepend the python executable (#!PYTHON_EXECUTABLE) to the file named pnd.py and rename it pnd
-echo "#!$PYTHON_EXECUTABLE" | cat - ~/.pnd/pnd.py > pnd
+echo "#!$PYTHON_EXECUTABLE" | cat - ~/.pnd/pnd.py | sudo tee pnd
 # change the pnd owed by the root user
-#sudo chown root pnd
 # print moving the file to the install location
 echo "Moving pnd executable to" $INSTALL_LOCATION
 # move the file to the install location
 sudo mv pnd $INSTALL_LOCATION
 # make the file executable by the root user
 echo "Setting permissions"
+#sudo chown root $INSTALL_LOCATION/pnd
+# change group to wheel
 sudo chmod u=rwx,g=rx,o=rx $INSTALL_LOCATION/pnd
 
 echo "Creating your secure data directory ~/.pnd"
