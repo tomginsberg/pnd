@@ -26,12 +26,13 @@ def check_crypt_req():
         raise RuntimeError('The cryptography package is required for this functionality (pip install cryptography)')
 
 
-ROOT = '/private/pass'
-PND = join(ROOT, 'pnd')
+HOME = environ['HOME']
+VAULT = join(HOME, '.pnd', 'vault')
+DATA = join(HOME, '.pnd', 'data')
 
 
 def load():
-    with open(PND, 'r') as f:
+    with open(DATA, 'r') as f:
         x = json.load(f)
     return x
 
@@ -51,7 +52,20 @@ def generate(length=12):
 
 if __name__ == '__main__':
     if len(argv) == 1:
-        print('pnd.py <pass name>|add|ls|rm|encrypt|decrypt|generate')
+        print('pnd <pass name>|add|ls|rm|encrypt|decrypt|generate\n')
+        print(
+            """
+        → `sudo pnd add` an interactive tool to add/generate new passwords
+        → `sudo pnd <name of password>` prints the password with a matching name to the console.
+        → `sudo pnd ls` prints of name of all saved passwords.
+        → `sudo pnd rm` an interactive tool to remove passwords.
+        → `sudo pnd encrypt` create an encrypted file named `~/.pnd/vault` to store your passwords safely using Fernet
+          encryption with a PBKDF2 derived key. This file is safe to back up to the cloud (e.g. google-drive or github)
+        → `sudo pnd decrypt` read the `~/.pnd/vault` into a `json` format that can replace your existing `pnd` file in
+          case of data loss.
+        → `pnd generate <length>` generate a secure password with a given length.
+          Note that `pnd add` also gives you the option to automatically generate passwords.
+            """)
         exit(1)
 
     if argv[1] == 'add':
@@ -78,7 +92,7 @@ if __name__ == '__main__':
         print(f'Adding password <{"*" * len(password)}> for {name}')
         x = load()
         x[name] = password
-        with open(PND, 'w') as f:
+        with open(DATA, 'w') as f:
             json.dump(x, f)
     elif argv[1] == 'ls':
         x = load()
@@ -123,16 +137,14 @@ if __name__ == '__main__':
         print('Encrypted passwords:')
         print(encrypted)
 
-        path = join(ROOT, 'vault')
-        print(f'Writing encrypted data to {path}')
-        with open(path, 'wb') as f:
+        print(f'Writing encrypted data to {VAULT}')
+        with open(VAULT, 'wb') as f:
             f.write(encrypted)
 
     elif argv[1] == 'decrypt':
         check_crypt_req()
         password = getpass('Key: ')
-        path = join(ROOT, 'vault')
-        with open(path, 'rb') as f:
+        with open(VAULT, 'rb') as f:
             encrypted = f.read()
 
         key = password.encode()
@@ -145,9 +157,15 @@ if __name__ == '__main__':
         key = base64.urlsafe_b64encode(kdf.derive(key))
         f = Fernet(key)
         decrypted = f.decrypt(encrypted).decode()
-        json_data = json.loads(decrypted)
-        name = argv[2]
-        print(json_data[name])
+        if len(argv) > 2:
+            name = argv[2]
+            json_data = json.loads(decrypted)
+            if name not in json_data:
+                print(f'No password for {name}')
+                exit(1)
+            print(json_data[name])
+        else:
+            print(decrypted)
 
     elif argv[1] == 'generate':
         # generate a random password
