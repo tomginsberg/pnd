@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # print text in green "Installing pnd to your system ...
-echo "\033[0;32mInstalling pnd to your system ...\033[0m"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Installing pnd to your system ..."
 # ask the user to select the install location default is /usr/local/bin
 read -r -p "Enter the install location (please insure this location is in your system path) [/usr/local/bin]: " INSTALL_LOCATION
 # if the user did not enter anything set the install location to /usr/local/bin
@@ -32,7 +33,7 @@ echo "Passwords will be stored in ~/.pnd/data, readable only by the root user"
 sudo touch ~/.pnd/data
 sudo chmod 700 ~/.pnd/data
 echo " "
-echo "\033[0;32mImprove the pnd user experience by adding the <pndc> function to your .bashrc/.zshrc file\033[0m"
+echo "Improve the pnd user experience by adding the <pndc> function to your .bashrc/.zshrc file"
 # find out if the user is on mac or linux
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # if the user is on linux then add the following line to the end of the .bashrc file
@@ -43,7 +44,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "  sudo pnd \$1 | xclip"
   echo "}"
   echo " "
-  echo '\033[0;32mFor beautiful fuzzy searching install fzf (https://github.com/junegunn/fzf) and add the <pnds> alias to your .bashrc/.zshrc file\033[0m'
+  echo 'For beautiful fuzzy searching install fzf (https://github.com/junegunn/fzf) and add the <pnds> alias to your .bashrc/.zshrc file'
   echo " "
   echo "alias pnds=\"sudo pnd ls | fzf | xargs sudo pnd | xclip\""
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -55,15 +56,15 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "}"
   # print a horizontal line
   echo " "
-  echo '\033[0;32mFor beautiful fuzzy searching install fzf (https://github.com/junegunn/fzf) and add the <pnds> alias to your .bashrc/.zshrc file\033[0m'
+  echo 'For beautiful fuzzy searching install fzf (https://github.com/junegunn/fzf) and add the <pnds> alias to your .bashrc/.zshrc file'
   echo " "
   echo "alias pnds=\"sudo pnd ls | fzf | xargs sudo pnd | pbcopy\""
 fi
 echo " "
 # print "Installation complete!" in green
-echo "\033[0;32mInstallation complete!\033[0m"
+echo "Installation complete!"
 echo "To get started run 'sudo pnd add'"
 echo " "
 # print in blue
 # "Note: to use all the features of pnd please install python cryptography (pip install cryptography)"
-echo "\033[0;34mNote: to use all the features of pnd please install python cryptography (pip install cryptography)\033[0m"
+echo "\033[0;34mNote: to use all the features of pnd please install python cryptography (pip install cryptography)"
