@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # print text in green "Installing pnd to your system ...
 echo "\033[0;32mInstalling pnd to your system ...\033[0m"
 # ask the user to select the install location default is /usr/local/bin
@@ -7,7 +8,7 @@ if [ -z "$INSTALL_LOCATION" ]; then
   INSTALL_LOCATION="/usr/local/bin"
 fi
 # download the file using wget
-wget -O pnd https://raw.githubusercontent.com/tomginsberg/pnd/main/pnd.py
+# wget -O pnd https://raw.githubusercontent.com/tomginsberg/pnd/main/pnd.py
 # ask the user for their python executable default is python3
 read -r -p "Enter your python executable [python3]: " PYTHON_EXECUTABLE
 # if the user did not enter anything set the python executable to python3
@@ -15,7 +16,7 @@ if [ -z "$PYTHON_EXECUTABLE" ]; then
   PYTHON_EXECUTABLE="python3"
 fi
 # prepend the python executable (#!PYTHON_EXECUTABLE) to the file named pnd.py and rename it pnd
-echo "#!$PYTHON_EXECUTABLE" | cat - pnd >temp && mv temp pnd
+echo "#!$PYTHON_EXECUTABLE" | cat - pnd.py > pnd
 
 # print moving the file to the install location
 echo "Moving pnd executable to" $INSTALL_LOCATION
@@ -27,7 +28,7 @@ sudo chmod 700 $INSTALL_LOCATION/pnd
 
 echo "Creating your secure data directory ~/.pnd"
 echo "Passwords will be stored in ~/.pnd/data, readable only by the root user"
-sudo mkdir -p ~/.pnd
+# sudo mkdir -p ~/.pnd
 sudo touch ~/.pnd/data
 sudo chmod 700 ~/.pnd/data
 echo " "
